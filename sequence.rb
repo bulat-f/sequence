@@ -2,10 +2,9 @@ require_relative 'sequence_element'
 
 class Sequence
   def initialize(elem_value = '1', amount = 1)
+    current_elem = SequenceElement.new(elem_value)
     @values = Array.new(amount) do
-      elem = SequenceElement.new(elem_value)
-      elem_value = SequenceElement.next_value(elem_value)
-      elem
+      current_elem.step!
     end
   end
 
