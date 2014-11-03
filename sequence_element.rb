@@ -13,15 +13,21 @@ class SequenceElement
     SequenceElement.new(next_value)
   end
 
-  def step!
+  def step
     current = SequenceElement.new(@value)
     @value = next_value
     current
   end
 
+  def self.build_substring(sub_arr)
+    sub_arr[0].length.to_s + sub_arr[1]
+  end
+
+  private
+
   def parse
-    @value.scan(/((\d)\2*)/).map do |substring|
-      substring[0].length.to_s + substring[1]
+    @value.scan(/((\d)\2*)/).map do |sub_arr|
+      SequenceElement.build_substring sub_arr
     end
   end
 
